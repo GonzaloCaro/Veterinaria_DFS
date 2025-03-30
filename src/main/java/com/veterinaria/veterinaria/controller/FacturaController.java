@@ -25,13 +25,13 @@ public class FacturaController {
         return facturaService.obtenerTodas();
     }
 
-    // GET /facturas/F001
+    // GET /facturas/1
     @GetMapping("/{id}")
     public Factura getFacturaById(@PathVariable String id) {
         return facturaService.obtenerPorId(id);
     }
 
-    // GET /facturas/cliente/C001
+    // GET /facturas/cliente/1
     @GetMapping("/cliente/{clienteId}")
     public List<Factura> getFacturasByCliente(@PathVariable String clienteId) {
         return facturaService.obtenerPorCliente(clienteId);
