@@ -1,42 +1,59 @@
 package com.veterinaria.veterinaria.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
+@Table(name = "FACTURA")
 public class Factura {
-    private String id;
-    private String clienteId;
-    private List<Servicio> servicios;
-    private String estado; // Pendiente, Pagada, Cancelada
 
-    public Factura(String id, String clienteId, List<Servicio> servicios, String estado) {
-        this.id = id;
-        this.clienteId = clienteId;
-        this.servicios = servicios;
-        this.estado = estado;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull(message = "El cliente es obligatorio")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
+
+    @Column(name = "fecha_creacion", nullable = false)
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+    @NotNull(message = "El estado es obligatorio")
+    @Column(nullable = false)
+    private String estado; // PENDIENTE, PAGADA, CANCELADA
+
+    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FacturaServicio> servicios;
+
+    // Constructores, Getters y Setters
+    public Factura() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getClienteId() {
-        return clienteId;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(String clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public List<Servicio> getServicios() {
-        return servicios;
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setServicios(List<Servicio> servicios) {
-        this.servicios = servicios;
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getEstado() {
@@ -47,4 +64,11 @@ public class Factura {
         this.estado = estado;
     }
 
+    public List<FacturaServicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<FacturaServicio> servicios) {
+        this.servicios = servicios;
+    }
 }
