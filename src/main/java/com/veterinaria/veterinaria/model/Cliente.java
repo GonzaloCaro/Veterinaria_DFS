@@ -1,23 +1,46 @@
 package com.veterinaria.veterinaria.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
+@Entity
+@Table(name = "CLIENTE")
 public class Cliente {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "El nombre es obligatorio")
+    @Column(nullable = false)
     private String nombre;
+
+    @Pattern(regexp = "^\\+?[0-9\\s]+$", message = "El teléfono debe ser válido")
     private String telefono;
+
     private String direccion;
 
-    public Cliente(String id, String nombre, String telefono, String direccion) {
-        this.id = id;
+    @Email(message = "El correo debe ser válido")
+    @Column(unique = true)
+    private String correo;
+
+    // Constructores
+    public Cliente() {
+    }
+
+    public Cliente(String nombre, String telefono, String direccion, String correo) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.correo = correo;
     }
 
-    public String getId() {
+    // Getters y Setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,5 +67,12 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 }
