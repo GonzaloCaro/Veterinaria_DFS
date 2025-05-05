@@ -2,7 +2,6 @@ package com.veterinaria.veterinaria.controller;
 
 import com.veterinaria.veterinaria.DTO.FacturaDTO;
 import com.veterinaria.veterinaria.exception.ResourceNotFoundException;
-import com.veterinaria.veterinaria.model.Factura;
 import com.veterinaria.veterinaria.model.ResponseWrapper;
 import com.veterinaria.veterinaria.service.FacturaService;
 import org.springframework.http.HttpStatus;
