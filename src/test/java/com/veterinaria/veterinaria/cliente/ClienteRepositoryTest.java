@@ -1,4 +1,4 @@
-package com.veterinaria.veterinaria;
+package com.veterinaria.veterinaria.cliente;
 
 import com.veterinaria.veterinaria.model.Cliente;
 import com.veterinaria.veterinaria.repository.ClienteRepository;
