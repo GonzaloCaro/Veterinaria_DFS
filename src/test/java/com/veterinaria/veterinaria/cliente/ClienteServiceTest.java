@@ -1,4 +1,4 @@
-package com.veterinaria.veterinaria;
+package com.veterinaria.veterinaria.cliente;
 
 import com.veterinaria.veterinaria.repository.ClienteRepository;
 import com.veterinaria.veterinaria.mapper.ClienteMapper;
